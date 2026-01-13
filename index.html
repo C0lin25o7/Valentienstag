@@ -2,21 +2,385 @@
 <html lang="de">
 <head>
     <meta charset="UTF-8">
-    <title>Valentinstag 💘</title>
-    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💝 Für Dich</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #ff758c, #ff7eb3, #ffa07a);
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Animierte Herzen im Hintergrund */
+        .heart {
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.6);
+            transform: rotate(45deg);
+            animation: float 6s infinite;
+            opacity: 0;
+        }
+
+        .heart:before,
+        .heart:after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 50%;
+        }
+
+        .heart:before {
+            left: -10px;
+        }
+
+        .heart:after {
+            top: -10px;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(45deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) rotate(45deg);
+                opacity: 0;
+            }
+        }
+
+        .container {
+            position: relative;
+            z-index: 10;
+            width: 90%;
+            max-width: 500px;
+        }
+
+        .box {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 25px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            animation: slideIn 0.6s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            color: #ff4d6d;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        p {
+            font-size: 1.1em;
+            margin-bottom: 25px;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            font-size: 1.2em;
+            padding: 15px 35px;
+            border: none;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        #yes {
+            background: linear-gradient(135deg, #ff4d6d, #ff758c);
+            color: white;
+        }
+
+        #yes:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255, 77, 109, 0.4);
+        }
+
+        #no {
+            background: #e0e0e0;
+            color: #666;
+            position: relative;
+            transition: all 0.2s ease;
+        }
+
+        /* Success Screen */
+        .success-screen {
+            display: none;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .photo-container {
+            margin: 25px 0;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .photo-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .emoji-big {
+            font-size: 4em;
+            margin: 20px 0;
+            animation: bounce 1s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        /* Music Control */
+        .music-control {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: white;
+            padding: 12px 20px;
+            border-radius: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            cursor: pointer;
+            z-index: 100;
+            display: none;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .music-control:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+
+        .music-icon {
+            font-size: 1.2em;
+        }
+
+        /* Mobile Optimierung */
+        @media (max-width: 600px) {
+            .box {
+                padding: 30px 20px;
+            }
+
+            h1 {
+                font-size: 1.6em;
+            }
+
+            p {
+                font-size: 1em;
+            }
+
+            button {
+                font-size: 1em;
+                padding: 12px 25px;
+            }
+
+            .emoji-big {
+                font-size: 3em;
+            }
+        }
+    </style>
 </head>
 <body>
-
-<div class="box">
-    <h1>💖 Willst du mein Valentinstags-Date sein? 💖</h1>
-    <p>Bitte wähle weise 😌</p>
-
-    <div class="buttons">
-        <button id="yes">JA 💘</button>
-        <button id="no">NEIN 🙈</button>
+    <div class="container">
+        <div class="box" id="mainBox">
+            <h1>💝 Willst du mein Valentinstag-Date sein? 💝</h1>
+            <p>Es würde mir sehr viel bedeuten... 🥺</p>
+            <div class="button-container">
+                <button id="yes">Ja! 💖</button>
+                <button id="no">Nein</button>
+            </div>
+        </div>
     </div>
-</div>
 
-<script src="script.js"></script>
+    <div class="music-control" id="musicControl">
+        <span class="music-icon">🎵</span>
+        <span id="musicStatus">Musik pausiert</span>
+    </div>
+
+    <audio id="bgMusic" loop>
+        <!-- Hier kannst du deine Musik-URL einfügen -->
+        <!-- <source src="Bruno Mars - Grenade (Lyrics).mp3" type="audio/mpeg"> -->
+    </audio>
+
+    <script>
+        const yesBtn = document.getElementById("yes");
+        const noBtn = document.getElementById("no");
+        const mainBox = document.getElementById("mainBox");
+        const bgMusic = document.getElementById("bgMusic");
+        const musicControl = document.getElementById("musicControl");
+        const musicStatus = document.getElementById("musicStatus");
+
+        let musicPlaying = false;
+
+        // Herzen im Hintergrund erstellen
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = (Math.random() * 3 + 4) + 's';
+            heart.style.animationDelay = Math.random() * 2 + 's';
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 8000);
+        }
+
+        // Herzen kontinuierlich erstellen
+        setInterval(createHeart, 300);
+
+        // "Ja" Button
+        yesBtn.addEventListener("click", () => {
+            // Musik starten
+            if (bgMusic.src) {
+                bgMusic.play().catch(e => console.log("Musik konnte nicht abgespielt werden"));
+                musicPlaying = true;
+                musicControl.style.display = "flex";
+                musicStatus.textContent = "Musik läuft";
+            }
+
+            mainBox.innerHTML = `
+                <div class="success-screen">
+                    <div class="emoji-big">💕</div>
+                    <h1>💘 Yaay! Date bestätigt! 💘</h1>
+                    <p>Ich freu mich riesig auf dich! 😘</p>
+                    
+                    <div class="photo-container">
+                        <img src="https://via.placeholder.com/400x300/ff758c/ffffff?text=Hier+dein+Foto+einfügen" alt="Unser Foto">
+                    </div>
+                    
+                    <p>Das wird der beste Valentinstag ever! ❤️</p>
+                </div>
+            `;
+
+            // Mehr Herzen bei Erfolg
+            for (let i = 0; i < 20; i++) {
+                setTimeout(createHeart, i * 100);
+            }
+        });
+
+        // "Nein" Button - springt weg
+        noBtn.addEventListener("mouseover", moveNoButton);
+        noBtn.addEventListener("touchstart", moveNoButton);
+
+        function moveNoButton(e) {
+            e.preventDefault();
+            
+            const maxX = window.innerWidth - noBtn.offsetWidth - 20;
+            const maxY = window.innerHeight - noBtn.offsetHeight - 20;
+            
+            const x = Math.random() * maxX;
+            const y = Math.random() * maxY;
+
+            noBtn.style.position = "fixed";
+            noBtn.style.left = x + "px";
+            noBtn.style.top = y + "px";
+            noBtn.style.zIndex = "1000";
+        }
+
+        // Musik Control
+        musicControl.addEventListener("click", () => {
+            if (musicPlaying) {
+                bgMusic.pause();
+                musicStatus.textContent = "Musik pausiert";
+                musicPlaying = false;
+            } else {
+                bgMusic.play();
+                musicStatus.textContent = "Musik läuft";
+                musicPlaying = true;
+            }
+        });
+
+        // =====================================================
+        // ANLEITUNG ZUM ANPASSEN:
+        // =====================================================
+        // 
+        // MUSIK HINZUFÜGEN:
+        // 1. Lade deine Musik-Datei hoch (z.B. zu einem File-Hosting)
+        // 2. Ersetze in Zeile 241: <source src="DEINE_MUSIK_URL.mp3"...
+        //    mit deiner echten URL
+        //
+        // FOTO HINZUFÜGEN:
+        // 1. Lade dein Foto hoch
+        // 2. Ersetze in Zeile 311 die URL:
+        //    src="https://via.placeholder.com..." 
+        //    mit deiner Foto-URL
+        //
+        // TEXTE ÄNDERN:
+        // - Zeile 268: Hauptfrage ändern
+        // - Zeile 269: Untertitel ändern
+        // - Zeile 301-305: Success-Screen Texte ändern
+        //
+        // =====================================================
+    </script>
 </body>
 </html>
